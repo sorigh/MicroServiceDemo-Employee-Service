@@ -5,7 +5,7 @@ public class EmployeeDTO {
     private int id;
     private String name;
     private String email;
-    private String age;
+    private int age;
 
 
     public int getId() {
@@ -32,11 +32,11 @@ public class EmployeeDTO {
         this.email = email;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
     }
 }

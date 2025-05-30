@@ -35,6 +35,34 @@ public class EmployeeService {
                 .collect(Collectors.toList());
     }
 
+    public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) {
+        Employee employee = mapper.map(employeeDTO, Employee.class);
+        Employee saved = employeeRepo.save(employee);
+        return mapper.map(saved, EmployeeDTO.class);
+    }
+
+    public EmployeeDTO updateEmployee(int id, EmployeeDTO employeeDTO) {
+        Optional<Employee> existingOpt = employeeRepo.findById(id);
+        if (existingOpt.isEmpty()) {
+            return null;
+        }
+        Employee existing = existingOpt.get();
+        existing.setName(employeeDTO.getName());
+        existing.setEmail(employeeDTO.getEmail());
+        existing.setAge(employeeDTO.getAge());
+        Employee saved = employeeRepo.save(existing);
+        return mapper.map(saved, EmployeeDTO.class);
+    }
+
+    public boolean deleteEmployee(int id) {
+        Optional<Employee> existingOpt = employeeRepo.findById(id);
+        if (existingOpt.isEmpty()) {
+            return false;
+        }
+        employeeRepo.deleteById(id);
+        return true;
+    }
+
 
 
 }
